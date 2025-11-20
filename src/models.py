@@ -11,6 +11,7 @@ from sqlobject import (
     connectionForURI,
     sqlhub,
 )
+from sqlobject.manager.command import SQLObjectVersionTable
 
 import config
 from enums import GENRES, UserStatus, USER_STATUSES
@@ -40,6 +41,8 @@ class Book(SQLObject):
     title = StringCol(length=100, notNone=True)
     year = IntCol(notNone=True)
     genre = EnumCol(enumValues=GENRES, notNone=True)
+    # New col
+    rate = IntCol(notNone=False)
 
     users = RelatedJoin("User")
 
@@ -62,8 +65,4 @@ Author.createTable(ifNotExists=True)
 Book.createTable(ifNotExists=True)
 User.createTable(ifNotExists=True)
 
-
-"""
-write python code that uses sqlobject orm and define model Author that has three fields: first_name, last_name and date_of_birth and unique index on first_name and last_name.
-it also defines Book model with author that is Foreign key to Author model. it additionally defines User with unique username who has many to many relation to Book model and status field which is an enum with values: inactive, active, deleted. It additionally creates connection to sqlite database, creates tables
-"""
+SQLObjectVersionTable.createTable(ifNotExists=True)

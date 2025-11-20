@@ -10,6 +10,7 @@ SQLObject = "==3.13.0"
 
 [dev-packages]
 black = "==24.10.0"
+setuptools = "==80"
 
 [requires]
 python_version = "3.12"
